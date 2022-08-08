@@ -127,7 +127,6 @@ class Bank {
         array.push(card);
       }
     })
-    console.log("Bobs your uncle: ", array);
     return array;
   }
 }
@@ -135,13 +134,3 @@ class Bank {
 module.exports = {
   Bank
 }
-
-// this.avaliable_cards.forEach(card => {
-//   if(card.hasRequirements.value) {
-//     if(card.hasRequirements.requirement.field === "income") {
-//       array.filter((card) => this.employmentCheck(card));
-//     } else if(card.hasRequirements.requirement.field === "employment") {
-//       array.filter((card) => this.incomeCheck(card));
-//     }
-//   }
-// })
