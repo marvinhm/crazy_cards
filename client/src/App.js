@@ -1,4 +1,3 @@
-import { buildQueries } from "@testing-library/react";
 import React, { useEffect, useState, useRef } from "react";
 import "./App.css";
 import Card from "./components/Card";
@@ -38,20 +37,45 @@ function App() {
   }, [data]);
 
   const listItems = (list) => {
-    let listBlock;
-    list.map((reptile) => listBlock += reptile.title);
-    console.log("block: " + listBlock);
-    setBlock(listBlock);
+    setBlock(list);
   }
+
+  function buildCards(list) {
+    return list.map((reptile) => <Card title={reptile.title} apr={reptile.apr} btod={reptile.btod} pod={reptile.pod} ca={reptile.ca}/>);
+  }
+
+  const handleChange = (e) => {
+    setUser({ ...user, title: e.target.value })
+  };
+
+  const Dropdown = ({ label, value, options, onChange }) => {
+    return (
+      <label>
+        {label}
+        <select value={value} onChange={onChange}>
+
+          {options.map((option) => (
+            <option value={option.value}>{option.value}</option>
+          ))}
+        </select>
+      </label>
+    );
+  };
 
   return (
     <div className="App">
       <header className="App-header">
         <div className="Card">
           <form ref={form} onSubmit={submit}>
-          <input type="text" name="user[title]" value={!!user && user.title} placeholder="name" onChange={e => setUser({ ...user, title: e.target.value })}/>
-
-            <input type="text" name="user[first_name]" value={!!user && user.first_name} placeholder="name" onChange={e => setUser({ ...user, first_name: e.target.value })}/>
+            <Dropdown 
+            label="title"
+            options={[
+              { value: 'Mr' },
+              { value: 'Mrs' },
+            ]}
+            value={user.title}
+            onChange={handleChange}/>
+            <input type="text" name="user[first_name]" value={!!user && user.first_name} placeholder="first name" onChange={e => setUser({ ...user, first_name: e.target.value })}/>
       
             <input type="text" name="user[surname]" value={!!user && user.surname} placeholder="surname" onChange={e => setUser({ ...user, surname: e.target.value })}/>
 
@@ -61,7 +85,7 @@ function App() {
             
             <input type="number" name="user[income]" value={!!user && user.income} placeholder="income" onChange={e => setUser({ ...user, income: e.target.value })}/>
 
-            <input type="number" name="user[house_number]" value={!!user && user.house_number} placeholder="house_number" onChange={e => setUser({ ...user, house_number: e.target.value })}/>
+            <input type="number" name="user[house_number]" value={!!user && user.house_number} placeholder="house number" onChange={e => setUser({ ...user, house_number: e.target.value })}/>
 
             <input type="text" name="user[postcode]" value={!!user && user.postcode} placeholder="postcode" onChange={e => setUser({ ...user, postcode: e.target.value })}/>
 
@@ -69,7 +93,15 @@ function App() {
           </form>
         </div>
 
-        {block ? block : "no data"}
+        {
+          block ?
+           
+          buildCards(block)
+          
+          :
+
+          "Nothing to see"
+        }
         
       </header>
     </div>
