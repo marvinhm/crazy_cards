@@ -11,41 +11,32 @@ function Card(props) {
   //   }, 2000);
   // }
 
-  // useEffect(() => {
-  //   getData();
-  // })
+  useEffect(() => {
+
+  })
 
 
 
 
     return (
       <div className="Card">
-        <h1>{props.data ? props.data.title : "title"}</h1>
+        <h1>{props.title}</h1>
         <div className="field apr">
-          <p className="label">label</p><p className="value">value</p>
-        </div>
-        <div className="field btod">
-          <p className="field label">label</p><p className="value">value</p>
-        </div>
-        <div className="field pod">
-        <p className="label">label</p><p className="value">value</p>
-        </div>
-        <div className="field credit">
-          <p className="label">label</p><p className="value">value</p>
-        </div>
+        <p className="label">{props.apr.label}</p><p className="value">{props.apr.value}</p>
+      </div>
+      <div className="field btod">
+        <p className="field label">{props.btod.label}</p><p className="value">{props.btod.value}</p>
+      </div>
+      <div className="field pod">
+      <p className="label">{props.pod.label}</p><p className="value">{props.pod.value}</p>
+      </div>
+      <div className="field credit">
+        <p className="label">{props.ca.label}</p><p className="value">{props.ca.value}</p>
+      </div>
+       
       </div>
     );
 
 }
-Card.propTypes = {
-  title: PropTypes.string,
-  first_name: PropTypes.string,
-  surname: PropTypes.number,
-  dob: PropTypes.string,
-  employment: PropTypes.string,
-  income: PropTypes.number,
-  house_number: PropTypes.string,
-  postode: PropTypes.string
-};
 
 export default Card;
