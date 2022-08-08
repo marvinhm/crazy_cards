@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./App.css";
 import Card from "./components/Card";
+import Header from "./components/Header"
 
 function App() {
   const [data, setData] = useState(null);
@@ -17,9 +18,14 @@ function App() {
   const [block, setBlock] = useState();
   const form = useRef(null);
 
-  const submit = e => {
+  useEffect(() => {
+    if(data) {
+      listItems(data);
+    }
+  }, [data]);
+
+  const submit = (e) => {
     e.preventDefault()
-    console.log("CR7", user);
     fetch('/cards', {
       method: 'POST',
       body: JSON.stringify({ user }),
@@ -29,31 +35,27 @@ function App() {
       .then(json => setData(json))
   }
 
-  useEffect(() => {
-    console.log("Look: ", data);
-    if(data) {
-      listItems(data);
-    }
-  }, [data]);
-
   const listItems = (list) => {
     setBlock(list);
   }
 
-  function buildCards(list) {
-    return list.map((reptile) => <Card title={reptile.title} apr={reptile.apr} btod={reptile.btod} pod={reptile.pod} ca={reptile.ca}/>);
+  const buildCards = (list) => {
+    return list.map((card) => <Card key={card.key} title={card.title} apr={card.apr} btod={card.btod} pod={card.pod} ca={card.ca}/>);
   }
 
-  const handleChange = (e) => {
+  const handleEmploymentChange = (e) => {
+    setUser({ ...user, employment: e.target.value })
+  };
+
+  const handleTitleChange = (e) => {
     setUser({ ...user, title: e.target.value })
   };
 
-  const Dropdown = ({ label, value, options, onChange }) => {
+  const Dropdown = ({ value, options, onChange }) => {
     return (
       <label>
-        {label}
         <select value={value} onChange={onChange}>
-
+        <option default disabled>title</option>
           {options.map((option) => (
             <option value={option.value}>{option.value}</option>
           ))}
@@ -63,48 +65,50 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className="Card">
-          <form ref={form} onSubmit={submit}>
-            <Dropdown 
-            label="title"
-            options={[
-              { value: 'Mr' },
-              { value: 'Mrs' },
-            ]}
-            value={user.title}
-            onChange={handleChange}/>
-            <input type="text" name="user[first_name]" value={!!user && user.first_name} placeholder="first name" onChange={e => setUser({ ...user, first_name: e.target.value })}/>
-      
-            <input type="text" name="user[surname]" value={!!user && user.surname} placeholder="surname" onChange={e => setUser({ ...user, surname: e.target.value })}/>
-
-            <input type="text" name="user[dob]" value={!!user && user.dob} placeholder="dob" onChange={e => setUser({ ...user, dob: e.target.value })}/>
-
-            <input type="text" name="user[employment]" value={!!user && user.employment} placeholder="employment" onChange={e => setUser({ ...user, employment: e.target.value })}/>
-            
-            <input type="number" name="user[income]" value={!!user && user.income} placeholder="income" onChange={e => setUser({ ...user, income: e.target.value })}/>
-
-            <input type="number" name="user[house_number]" value={!!user && user.house_number} placeholder="house number" onChange={e => setUser({ ...user, house_number: e.target.value })}/>
-
-            <input type="text" name="user[postcode]" value={!!user && user.postcode} placeholder="postcode" onChange={e => setUser({ ...user, postcode: e.target.value })}/>
-
-            <input type="submit" name="Sign Up" />
-          </form>
-        </div>
-
-        {
-          block ?
-           
-          buildCards(block)
-          
-          :
-
-          "Nothing to see"
-        }
+      <div className="App-Container">
+        <Header title="Crazy Cards Application"/>
+        <div className="container">
+          <section>
+            <form ref={form} onSubmit={submit}>
+              <Dropdown 
+              label="title"
+              options={[
+                { value: 'mr' },
+                { value: 'miss' },
+                { value: 'mrs' },
+              ]}
+              value={user.title}
+              onChange={handleTitleChange}/>
+              <input type="text" name="user[first_name]" value={!!user && user.first_name} placeholder="first name" onChange={e => setUser({ ...user, first_name: e.target.value })}/>
         
-      </header>
-    </div>
+              <input type="text" name="user[surname]" value={!!user && user.surname} placeholder="surname" onChange={e => setUser({ ...user, surname: e.target.value })}/>
+
+              <input type="text" name="user[dob]" value={!!user && user.dob} placeholder="dob" onChange={e => setUser({ ...user, dob: e.target.value })}/>
+
+              <Dropdown 
+              label="employment"
+              options={[
+                { value: 'employed' },
+                { value: 'self employed' },
+                { value: 'student' },
+              ]}
+              value={user.employment}
+              onChange={handleEmploymentChange}/>
+              
+              <input type="number" name="user[income]" value={!!user && user.income} placeholder="income" onChange={e => setUser({ ...user, income: e.target.value })}/>
+
+              <input type="number" name="user[house_number]" value={!!user && user.house_number} placeholder="house number" onChange={e => setUser({ ...user, house_number: e.target.value })}/>
+
+              <input type="text" name="user[postcode]" value={!!user && user.postcode} placeholder="postcode" onChange={e => setUser({ ...user, postcode: e.target.value })}/>
+
+              <input type="submit" name="Sign Up" />
+            </form>
+          </section>
+          <section className="cards">
+          {block ? buildCards(block) : "Fill out the form to find out which cards are avaliable to you"}
+          </section>
+        </div>
+      </div>
   );
 }
 

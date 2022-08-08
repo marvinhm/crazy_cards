@@ -11,7 +11,6 @@ let newUser;
 
 router.post('/', (req, res, next) => {
   const {body} = req;
-  console.log("ETH: ", body.user);
 
   // if(typeof body.first_name !== 'string') {
   //   return next(createError(422, 'Validation Error!'));

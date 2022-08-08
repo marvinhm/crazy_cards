@@ -14,7 +14,7 @@ class Bank {
           }
         },
         apr: {
-          label: "Apr",
+          label: "Annual Percentage Rate",
           value: 18.9
         },
         btod: {
@@ -37,7 +37,7 @@ class Bank {
           requirement: {}
         },
         apr: {
-          label: "Apr",
+          label: "Annual Percentage Rate",
           value: 33.9
         },
         btod: {
@@ -63,7 +63,7 @@ class Bank {
           }
         },
         apr: {
-          label: "Apr",
+          label: "Annual Percentage Rate",
           value: 33.9
         },
         btod: {
