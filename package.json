@@ -1,7 +1,7 @@
 {
-  "name": "totalmoney",
+  "name": "crazycards",
   "version": "1.0.0",
-  "description": "Totally Money App",
+  "description": "Crazy Cards App",
   "main": "app.js",
   "scripts": {
     "start": "node server/app.js",
