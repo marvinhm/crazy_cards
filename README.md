@@ -1,7 +1,9 @@
-# Getting Started with Crazy Cards Application
+# Crazy Cards Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app),
-with Node backend on the Backend
+A web application to allow customers to enter their details and review credit cards that are applicable to their credit status.
+
+This project uses [React](https://github.com/facebook/create-react-app),
+with Node on the Backend
 
 ## Available Scripts
 
@@ -22,5 +24,5 @@ Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 
-In the root, we can launches the test runner using
+In the root, we can launch the test runner using
 ### `npm test`

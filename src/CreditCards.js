@@ -1,6 +1,6 @@
 // const { Customer } = require("./src/Customer.js")
 
-class Bank {
+class CreditCards {
   constructor(customer) {
     this.customer = customer;
     this.avaliable_cards = [
@@ -132,5 +132,5 @@ class Bank {
 }
 
 module.exports = {
-  Bank
+  CreditCards
 }
