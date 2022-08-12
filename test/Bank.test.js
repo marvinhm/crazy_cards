@@ -80,7 +80,7 @@ describe("Bank", () => {
           }
         },
         apr: {
-          label: "Apr",
+          label: "Annual Percentage Rate",
           value: 33.9
         },
         btod: {
