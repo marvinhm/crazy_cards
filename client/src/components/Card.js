@@ -18,7 +18,7 @@ function Card(props) {
             <p className="label">{props.btod.label}</p>
           </div>
           <div className="value-container">
-            <p className="value">{props.btod.value}</p>
+            <p className="value">{props.btod.value} months</p>
           </div>
         </div>
         <div className="field pod">
@@ -26,7 +26,7 @@ function Card(props) {
             <p className="label">{props.pod.label}</p>
           </div>
           <div className="value-container">
-            <p className="value">{props.pod.value}</p>
+            <p className="value">{props.pod.value} months</p>
           </div>
         </div>
         <div className="field ca">
@@ -34,7 +34,7 @@ function Card(props) {
             <p className="label">{props.ca.label}</p>
           </div>
           <div className="value-container">
-            <p className="value">{props.ca.value}</p>
+            <p className="value">£{props.ca.value}</p>
           </div>
         </div>
       </div>
